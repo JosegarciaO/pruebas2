@@ -1,0 +1,32 @@
+%td
+  %div ${id}
+  %div ${num_constancia}
+%td
+  %div ${nombre}
+  %div{ :class => 'sub-item-table' } ${rfc}
+%td
+  %div ${fecha_salida}
+  %div ${fecha_llegada}
+%td
+  %div ${moneda_name} {{format_currency importe}}
+  %div ${moneda_name} {{format_currency total_prime}}
+%td
+  {{if status == 1}}
+  %span.label ${status_name}
+  {{/if}}
+  {{if status == 2}}
+  %span.label.label-info ${status_name}
+  {{/if}}
+  {{if status == 3}}
+  %span.label.label-warning ${status_name}
+  {{/if}}
+  {{if status == 4}}
+  %span.label.label-success ${status_name}
+  {{/if}}
+
+%td.links
+  = link_to "", "#/${id}".html_safe, :class => "icon-eye-open", :title => t("links.show"), :alt => t("links.show")
+  = link_to "", "#/${id}/edit".html_safe, :class => "icon-edit", :title => t("links.edit"), :alt => t("links.edit")
+  = link_to '', "#{certificate_requests_path}/${id}/print/certificado.pdf", :class => "icon-print", :title => "PDF Certificado", :alt => "PDF Certificado"
+  
+  -#= link_to "", "#".html_safe, :class => "destroy icon-remove", :confirm => t("links.confirm"), :title => t("links.destroy"), :alt => t("links.destroy")

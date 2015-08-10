@@ -1,0 +1,39 @@
+.row
+  .span12
+    = form_for User.new, :url => "", :html => { :id => "#{form_type}_user" } do |f|
+      %fieldset
+        .row
+          .span4
+            .control-group
+              = f.label :email, :class => "control-label"
+              .controls
+                = f.text_field :email, :class => "input-xlarge"
+
+          .span4
+            .control-group
+              = f.label :role_id, :class => "control-label"
+              .controls
+                = f.collection_select :role_id, @roles, :id, :name, { :prompt => true }
+
+          -#.span4
+          -#  .control-group
+          -#    = f.label :name, :class => "control-label"
+          -#    .controls
+          -#      = f.text_field :name, :class => "input-xlarge"
+
+        .row
+          .span4
+            .control-group
+              = f.label :password, :class => "control-label"
+              .controls
+                = f.password_field :password, :class => "input-medium"
+
+          .span4
+            .control-group
+              = f.label :password_confirmation, :class => "control-label"
+              .controls
+                = f.password_field :password_confirmation, :class => "input-medium"
+
+
+        .form-actions
+          = f.submit t("helpers.submit.#{form_type}", :model => f.object.class.model_name.human), :class => "btn btn-primary"

@@ -1,0 +1,25 @@
+.row
+  .span12
+    = form_for City.new, :url => "", :html => { :id => "#{form_type}_city" } do |f|
+      %fieldset
+        .control-group
+          %label= "País"
+          .controls
+            = select_tag "country_id", options_from_collection_for_select(@countries, "id", "name"), { :class => "input-xlarge", :prompt => "- Seleccione -" }
+
+        .control-group
+          = f.label :state_id, :class => "control-label"
+          .controls
+            = f.collection_select :state_id, [], :id, :name, { :prompt => true, :class => "input-xlarge" }
+
+        .control-group
+          = f.label :name, :class => "control-label"
+          .controls
+            = f.text_field :name, :class => "input-xlarge"
+
+      .row
+        #eip-container.span12
+
+      .row
+        #eip-buttons.span12.well
+          = f.submit t("helpers.submit.#{form_type}", :model => f.object.class.model_name.human), :class => "btn btn-primary right"

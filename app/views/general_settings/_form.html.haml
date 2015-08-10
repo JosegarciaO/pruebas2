@@ -1,0 +1,53 @@
+.row
+  .span12
+    = form_for GeneralSetting.new, :url => "", :html => { :id => "#{form_type}_general_setting" } do |f|
+      %fieldset
+        .row
+          .span12
+            .control-group
+              = f.label :iva, :class => "control-label", :maxlength => 6
+              .controls
+                = f.text_field :iva, :class => "input-small"
+
+        .row
+          .span12
+            .control-group
+              = f.label :base_fee_min, :class => "control-label"
+              .controls
+                = f.text_field :base_fee_min, :class => "input-small", :maxlength => 6
+
+        .row
+          .span12
+            .control-group
+              = f.label :exchange_usd, :class => "control-label"
+              .controls
+                = f.text_field :exchange_usd, :class => "input-small", :maxlength => 10
+
+        .row
+          .span12
+            .control-group
+              = f.label :certificate_consecutive, :class => "control-label"
+              .controls
+                = f.text_field :certificate_consecutive, :class => "input-small"
+
+        .row
+          .span12
+            .control-group
+              = f.label :packaging_default, :class => "control-label"
+              .controls
+                = f.text_field :packaging_default, :class => "input-large span8", :maxlength => 250
+
+        .row
+          .span12
+            .control-group
+              = f.label :deducible_default, :class => "control-label"
+              .controls
+                = f.text_area :deducible_default, :value => "${deducible_default}", :class => "input-large span8", :rows => 5
+
+
+      .row
+        #eip-container.span12
+
+      .row
+        #eip-buttons.span12.well
+          = f.submit t("helpers.submit.#{form_type}", :model => f.object.class.model_name.human), :class => "btn btn-primary right"

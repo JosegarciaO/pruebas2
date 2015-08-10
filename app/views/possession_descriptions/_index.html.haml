@@ -1,0 +1,21 @@
+.row
+  .span12
+    .page-header
+      %h1= t(".title")
+      %ul.tabs
+        %li
+          = link_to t("links.new", :resource => PossessionDescription.model_name.human), "#/new"
+
+.row
+  .span12
+    %table#possession_descriptions_table.table.table-striped
+      %thead
+        %tr
+          %th= PossessionDescription.human_attribute_name(:name)
+          %th= PossessionDescription.human_attribute_name(:possession_id)
+          %th.actions
+            = link_to "", "#", :class => "icon-refresh", :id => "refresh_possession_descriptions", :title => t("links.refresh"), :alt => t("links.refresh")
+
+      %tbody
+
+#pagination-container

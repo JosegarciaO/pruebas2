@@ -1,0 +1,20 @@
+%div
+  -# field to save the last values for filters
+  = hidden_field_tag 'tmp-value-status', '', :id => 'tmp-value-status'
+  = hidden_field_tag 'tmp-value-search', '', :id => 'tmp-value-search'
+#certificate_requests
+
+:javascript
+  $(function() {
+    window.router = new CertOrbe.Routers.CertificateRequestsRouter({ certificateRequests: #{ @certificate_requests.to_json.html_safe } });
+    Backbone.history.start();
+  });
+
+- content_for :templates do
+  = script_template("index")
+  = script_template("new")
+  = script_template("show")
+  = script_template("edit")
+  = script_template("coverages")
+  = script_template("clauses")
+  = script_template("certificate_request")

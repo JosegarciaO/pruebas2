@@ -1,0 +1,23 @@
+CertOrbe.Views.Countries ||= {}
+
+class CertOrbe.Views.Countries.NewView extends CertOrbe.Views.Countries.FormView
+  template: (data) -> $("#backboneTemplatesCountriesNew").tmpl(data)
+
+  initialize: (options) ->
+    super(options)
+    @model = new @collection.model()
+    @model.bind("error", @renderErrors)
+
+  events:
+    _.extend( _.clone(@__super__.events),
+      "submit #new_country": "save"
+    )
+
+  render: ->
+    $(@el).html( @template( @model.toJSON(true, true) ) )
+    this.$("form#new_country").backboneLink(@model)
+    return this
+
+  remove: ->
+    @model.unbind("error", @renderErrors)
+    super()

@@ -1,0 +1,21 @@
+.row
+  .span12
+    .page-header
+      %h1= t(".title")
+      %ul.tabs
+        %li
+          = link_to t("links.new", :resource => Clause.model_name.human), "#/new"
+
+.row
+  .span12
+    %table#clauses_table.table.table-striped
+      %thead
+        %tr
+          %th= Clause.human_attribute_name(:name)
+          %th= Clause.human_attribute_name(:isfixed)
+          %th.actions
+            = link_to "", "#", :class => "icon-refresh", :id => "refresh_clauses", :title => t("links.refresh"), :alt => t("links.refresh")
+
+      %tbody
+
+#pagination-container

@@ -1,0 +1,12 @@
+#reports
+
+:javascript
+  $(function() {
+    window.router = new CertOrbe.Routers.ReportsRouter();
+    Backbone.history.start();
+  });
+
+- content_for :templates do
+  = script_template("index")
+  = script_template("report_data_emitted")
+  = script_template("report_data_canceled")

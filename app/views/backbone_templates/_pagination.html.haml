@@ -1,0 +1,25 @@
+.row
+  %hr
+  .pagination.pagination-centered
+    %ul
+
+      {{if paginatePrev}}
+      %li.prev
+        = link_to t('will_paginate.previous'), '${paginatePrev}'
+      {{else}}
+      %li.prev.disabled
+        = link_to t('will_paginate.previous'), '#'
+      {{/if}}
+
+      {{each pages}}
+      %li{:class => "${liKlass}"}
+        = link_to "${text}", '${path}'
+      {{/each}}
+
+      {{if paginateNext}}
+      %li.next
+        = link_to t('will_paginate.next'), '${paginateNext}'
+      {{else}}
+      %li.next.disabled
+        = link_to t('will_paginate.next'), '#'
+      {{/if}}

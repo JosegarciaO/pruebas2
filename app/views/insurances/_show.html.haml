@@ -1,0 +1,62 @@
+.row
+  .span12
+    .page-header
+      %h1= t(".title")
+      %ul.tabs
+        %li= link_to t("links.back"), "#/index"
+        %li= link_to t("links.edit"), "#/${id}/edit"
+        %li= link_to t("links.destroy"), "#/index", :class => "destroy", :confirm => t("links.confirm")
+
+.row
+  .span8
+    %p
+      %strong= Insurance.human_attribute_name(:name)
+      ${name}
+
+    %p
+      %strong= Insurance.human_attribute_name(:tin)
+      ${tin}
+
+    %p
+      %strong= Insurance.human_attribute_name(:street)
+      ${street}
+
+    %p
+      %strong= Insurance.human_attribute_name(:area)
+      ${area}
+
+    %p
+      %strong= Insurance.human_attribute_name(:expedition_fee_mx)
+      ${expedition_fee_mx}
+
+    %p
+      %strong= Insurance.human_attribute_name(:expedition_fee_us)
+      ${expedition_fee_us}
+
+    %p
+      %strong= Insurance.human_attribute_name(:max_amount)
+      ${max_amount}
+
+    -# --- IMAGENES ---
+    %p
+      %strong= Insurance.human_attribute_name(:logo)
+      %br
+      = image_tag "..${logo}", :width => 150
+    %p
+      %strong= Insurance.human_attribute_name(:firma1)
+      %br
+      = image_tag "..${firma1}", :width => 150
+    %p
+      %strong= Insurance.human_attribute_name(:firma2)
+      %br
+      = image_tag "..${firma2}", :width => 150
+
+
+  .span4
+    .dashboard
+      .page-header
+        %h3
+      %p
+
+
+

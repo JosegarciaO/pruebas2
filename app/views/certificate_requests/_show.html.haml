@@ -1,0 +1,128 @@
+.row
+  .span12
+    .page-header
+      %h1= t(".title")
+      %ul.tabs
+        %li= link_to t("links.back"), "#/index"
+        %li= link_to t("links.edit"), "#/${id}/edit"
+        %li= link_to t("links.destroy"), "#/index", :class => "destroy", :confirm => t("links.confirm")
+
+.row
+  .span8
+    %p
+      %strong= CertificateRequest.human_attribute_name(:num_constancia)
+      ${num_constancia}
+
+    %p
+      %strong= CertificateRequest.human_attribute_name(:nombre)
+      ${nombre}
+
+    %p
+      %strong= CertificateRequest.human_attribute_name(:direccion)
+      ${direccion}
+
+    %p
+      %strong= CertificateRequest.human_attribute_name(:city_id)
+      ${city.name}, ${city.state.name}
+
+    %p
+      %strong= CertificateRequest.human_attribute_name(:cp)
+      ${cp}
+
+    %p
+      %strong= CertificateRequest.human_attribute_name(:rfc)
+      ${rfc}
+
+    %br
+    %p
+      %strong= CertificateRequest.human_attribute_name(:medio_transporte)
+      ${medio_transporte_name}
+
+    %p
+      %strong= CertificateRequest.human_attribute_name(:fecha_salida)
+      ${fecha_salida}
+
+    %p
+      %strong= CertificateRequest.human_attribute_name(:fecha_llegada)
+      ${fecha_llegada}
+
+    %p
+      %strong= CertificateRequest.human_attribute_name(:city_from_id)
+      ${city_from.name}, ${city_from.state.name}
+
+    %p
+      %strong= CertificateRequest.human_attribute_name(:city_to_id)
+      ${city_to.name}, ${city_to.state.name}
+
+    %p
+      %strong= CertificateRequest.human_attribute_name(:possession_id)
+      ${possession.name}
+
+    %p
+      %strong= CertificateRequest.human_attribute_name(:possession_description)
+      ${possession_description}
+
+    %p
+      %strong= CertificateRequest.human_attribute_name(:packaging)
+      ${packaging}
+
+    %p
+      %strong= CertificateRequest.human_attribute_name(:num_invoice)
+      ${num_invoice}
+
+    %p
+      %strong= CertificateRequest.human_attribute_name(:beneficiario)
+      {{if use_beneficiario}}
+      ${beneficiario}
+      {{else}}
+      = "Sin Beneficiario"
+      {{/if}}
+
+    %br
+    %p
+      %strong= CertificateRequest.human_attribute_name(:moneda)
+      ${moneda_name}
+
+    %p
+      %strong= CertificateRequest.human_attribute_name(:importe)
+      ${importe}
+
+    %p
+      %strong= CertificateRequest.human_attribute_name(:base_fee)
+      ${base_fee} %
+
+    %p
+      %strong= CertificateRequest.human_attribute_name(:iva)
+      ${iva} %
+
+    %p
+      %strong= CertificateRequest.human_attribute_name(:total_prime)
+      ${total_prime}
+
+    %br
+    %p
+      %strong= CertificateRequest.human_attribute_name(:deducibles)
+      ${deducibles}
+
+    %p
+      %strong= CertificateRequest.human_attribute_name(:codigo_seguridad)
+      {{if codigo_correcto}}
+      %span.texto-success ${codigo_seguridad}
+      {{else}}
+      %span.texto-warning ${codigo_seguridad}
+      {{/if}}
+
+    %p
+      {{if status == 4}}
+      {{if codigo_correcto}}
+      %span.label.label-success= "Código de seguridad correcto"
+      {{else}}
+      %span.label.label-important= "Código de seguridad incorrecto"
+      {{/if}}
+      {{/if}}
+
+  .span4
+    .dashboard
+      .page-header
+        %h3
+      %p

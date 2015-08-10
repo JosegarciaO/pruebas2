@@ -1,0 +1,14 @@
+#cities
+
+:javascript
+  $(function() {
+    window.router = new CertOrbe.Routers.CitiesRouter({ cities: #{ @cities.to_json.html_safe } });
+    Backbone.history.start();
+  });
+
+- content_for :templates do
+  = script_template("index")
+  = script_template("new")
+  = script_template("show")
+  = script_template("edit")
+  = script_template("city")

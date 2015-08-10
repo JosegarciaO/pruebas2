@@ -1,0 +1,22 @@
+.row
+  .span12
+    .page-header
+      %h1= t(".title")
+      %ul.tabs
+        %li
+          = link_to t("links.new", :resource => GeneralSetting.model_name.human), "#/new" if @total_records == 0
+
+.row
+  .span12
+    %table#general_settings_table.table.table-striped
+      %thead
+        %tr
+          %th= GeneralSetting.human_attribute_name(:iva)
+          %th= GeneralSetting.human_attribute_name(:base_fee_min)
+          %th= GeneralSetting.human_attribute_name(:exchange_usd)
+          %th.actions
+            = link_to "", "#", :class => "icon-refresh", :id => "refresh_general_settings", :title => t("links.refresh"), :alt => t("links.refresh")
+
+      %tbody
+
+#pagination-container

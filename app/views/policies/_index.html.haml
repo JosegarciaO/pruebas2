@@ -1,0 +1,25 @@
+.row
+  .span12
+    .page-header
+      %h1= t(".title")
+      %ul.tabs
+        %li
+          = link_to t("links.new", :resource => Policy.model_name.human), "#/new"
+
+.row
+  .span12
+    %table#policies_table.table.table-striped
+      %thead
+        %tr
+          %th= Policy.human_attribute_name(:folio)
+          %th= Policy.human_attribute_name(:moneda)
+          %th= Policy.human_attribute_name(:date_start)
+          %th= Policy.human_attribute_name(:date_end)
+          %th= Policy.human_attribute_name(:insurance_id)
+          %th= ""
+          %th.actions
+            = link_to "", "#", :class => "icon-refresh", :id => "refresh_policies", :title => t("links.refresh"), :alt => t("links.refresh")
+
+      %tbody
+
+#pagination-container

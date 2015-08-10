@@ -1,0 +1,8 @@
+= form.fields_for :annexes, :child_index => "${annex_cid }" do |f|
+  .span4
+    .annex-container
+      = image_tag '..${image_url}', :class => 'annex-thumb'
+
+    = f.hidden_field :id, :value => "${id}"
+    = f.file_field :image
+    = link_to t("links.destroy"), "#", :class => "destroy-item-annex btn btn-danger", :'data-confirm' => "¿Esta seguro?"

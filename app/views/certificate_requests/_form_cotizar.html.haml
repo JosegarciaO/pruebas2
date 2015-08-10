@@ -1,0 +1,265 @@
+= form_for CertificateRequest.build_object, :url => "", :html => { :id => "#{form_type}_certificate_request" } do |f|
+  = content_for :templates do
+    = script_template("certificate_request_coverage_fields_for_#{form_type}", :partial => 'certificate_requests/nesteds/certificate_request_coverages/fields_for', :locals => {:form => f})
+
+  %fieldset
+    .row-fluid
+      .span6
+        .row-fluid
+          .span12
+            .control-group
+              = f.label :num_constancia, :class => "control-label"
+              .controls
+                %b ${num_constancia}
+        .row-fluid
+          .span12
+            .control-group
+              = f.label :moneda, :class => "control-label"
+              .controls
+                %b ${moneda_name}
+        .row-fluid
+          .span12
+            .control-group
+              = f.label :policy_id, :class => "control-label"
+              .controls
+                = f.collection_select :policy_id, [], :id, :folio, { :prompt => "- Seleccione -", :class => "input-medium" }
+                %p#name_insurance= "${insurance_name}"
+
+      .span4
+        .row-fluid
+          .span6
+            = f.label :importe, :class => "control-label"
+          .span6
+            = f.text_field :importe, :class => "input-small"
+
+        .row-fluid
+          .span6
+            = f.label :base_fee, :class => "control-label"
+          .span6
+            = f.text_field :base_fee, :class => "input-small", :min_attr => "#{@cuota_base_min}", :title => "Minimo: #{@cuota_base_min}%"
+            = " %"
+        .row-fluid
+          .span6.control-label= "Prima Neta"
+          .span6
+            = text_field_tag :txt_prima_neta, 0, :class => "input-small", :readonly => true
+
+        .row-fluid
+          .span6
+            = f.label :expedition_fee, :class => "control-label"
+          .span6
+            = f.text_field :expedition_fee, :class => "input-small", :readonly => true
+        .row-fluid
+          .span6
+            = f.label :iva_amount, :class => "control-label"
+          .span6
+            = f.text_field :iva_amount, :class => "input-small", :readonly => true, :porc_iva => "#{@iva}"
+            = "#{@iva}%"
+        .row-fluid
+          .span6
+            = f.label :total_prime, :class => "control-label"
+          .span6
+            = f.text_field :total_prime, :class => "input-small", :readonly => true
+
+      .span2
+        .row-fluid
+          .span12
+            {{if status == 1}}
+            .label.pull-right= "SOLICITADO"
+            {{/if}}
+        .row-fluid
+          .span12
+            {{if cancelado == 1}}
+            .label.label-important.pull-right= "CANCELADO"
+            {{/if}}
+
+    %br
+    .row-fluid
+      .span12
+        %ul#nav-secciones.nav.nav-tabs{ :style => "margin-bottom: 0px" }
+          %li.active
+            %a{ :vista => 'divCliente', :href => '#' }
+              %b= "Datos del Cliente"
+          %li
+            %a{ :vista => 'divBienes', :href => '#' }
+              %b= "Bienes Asegurados"
+          %li
+            %a{ :vista => 'divTransito', :href => '#' }
+              %b= "Tránsito"
+
+    .row-fluid#divCliente.divSecciones
+      .span12.tabSeccion
+
+        .row-fluid
+          .span6
+            .control-group
+              = f.label :nombre, :class => "control-label"
+              .controls
+                %b ${nombre}
+          .span4
+            .control-group
+              = f.label :rfc, :class => "control-label"
+              .controls
+                %b ${rfc}
+
+        .row-fluid
+          .span6
+            .control-group
+              = f.label :direccion, :class => "control-label"
+              .controls
+                %b ${direccion}
+          .span4
+            .control-group
+              = f.label :cp, :class => "control-label"
+              .controls
+                %b ${cp}
+
+        .row-fluid
+          .span3
+            .control-group
+              %label= "País"
+              .controls
+                %b ${city.state.country.name}
+          .span3
+            .control-group
+              %label= "Estado"
+              .controls
+                %b ${city.state.name}
+          .span3
+            .control-group
+              = f.label :city_id, :class => "control-label"
+              .controls
+                %b ${city.name}
+
+
+    .row-fluid#divBienes.divSecciones{ :style => "display:none" }
+      .span12.tabSeccion
+
+        .row-fluid
+          .span12
+            .control-group
+              = f.label :possession_id, :class => "control-label"
+              .controls
+                %b ${possession.name}
+
+        .row-fluid
+          .span12
+            .control-group
+              = f.label :possession_description, :class => "control-label"
+              .controls
+                %b ${possession_description}
+
+        .row-fluid
+          .span12
+            .control-group
+              = f.label :packaging, :class => "control-label"
+              .controls
+                %b ${packaging}
+
+
+    .row-fluid#divTransito.divSecciones{ :style => "display:none" }
+      .span12.tabSeccion
+
+        .row-fluid
+          .span1= "Medios:"
+          %b ${medio_transporte_name}
+
+        .row-fluid
+          .span2
+            .control-group
+              = f.label :fecha_salida, :class => "control-label"
+              .control
+                %b ${fecha_salida}
+
+          .span2
+            .control-group
+              = f.label :fecha_llegada, :class => "control-label"
+              .control
+                %b ${fecha_llegada}
+
+          .span2
+            .control-group
+              = f.label :num_invoice, :class => "control-label"
+              .controls
+                %b ${num_invoice}
+
+          .span4
+            .control-group
+              %span= "Beneficiario"
+              .controls
+                {{if use_beneficiario}}
+                %b ${beneficiario}
+                {{else}}
+                %b= "N/A"
+                {{/if}}
+
+        .row-fluid
+          .span12
+            .control-group
+              %label= "Desde (origen)"
+              .controls
+                %b ${city_from.name}, ${city_from.state.name}, ${city_from.state.country.name}
+
+
+        .row-fluid
+          .span12
+            .control-group
+              %label= "hasta (destino)"
+              .controls
+                %b ${city_to.name}, ${city_to.state.name}, ${city_to.state.country.name}
+
+    %br
+    %br
+    .row-fluid
+      .span12
+        %legend
+          %h4= "Comentarios:"
+
+    .row-fluid
+      .span12
+        .control-group
+          = f.label :deducibles, :class => "control-label"
+          .controls
+            = f.text_area :deducibles, :value => "#{@deducible_default}", :class => "input-xlarge span12", :rows => 5
+
+  %br
+  .row-fluid
+    .span12
+
+    .row-fluid
+      .span12.pull-right
+        %table{ :class => "table table-striped table-borderer table-condensed" }
+          %thead
+            %tr
+              %th= "Coberturas"
+              %th= ""
+              %th= ""
+          %tbody{ :id => "container_coverages" }
+
+    %br
+    .row-fluid
+      .span12
+
+      .row-fluid
+        .span12.pull-right
+          %table{ :class => "table table-striped table-borderer table-condensed" }
+            %thead
+              %tr
+                %th= "Cláusulas"
+                %th= ""
+                %th= ""
+            %tbody{ :id => "container_clauses" }
+
+    %br
+    {{if cancelado == 0}}
+    .row-fluid
+      .span6
+        -if can? :setQuoteCertificate, CertificateRequest
+          .btn.btn-primary#cmdCotizar= "Cotizar Solicitud"
+      .span6
+        - if can? :setCancelCertificate, CertificateRequest
+          {{if status}}
+          .btn.btn-danger.pull-right#cmdCancelar= "Cancelar Solicitud"
+          {{/if}}
+    {{/if}}
+    %br
+    %br

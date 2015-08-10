@@ -1,0 +1,25 @@
+.row
+  .span12
+    = form_for CertificateRequestClause.new, :url => "", :html => { :id => "#{form_type}_certificate_request_clause" } do |f|
+      %fieldset
+        .control-group
+          = f.label :certificate_request, :class => "control-label"
+          .controls
+            = f.text_field :certificate_request, :class => "input-xlarge"
+
+        .control-group
+          = f.label :clause, :class => "control-label"
+          .controls
+            = f.text_field :clause, :class => "input-xlarge"
+
+        .control-group
+          = f.label :is_included, :class => "control-label"
+          .controls
+            = f.text_field :is_included, :class => "input-xlarge"
+
+      .row
+        #eip-container.span12
+
+      .row
+        #eip-buttons.span12.well
+          = f.submit t("helpers.submit.#{form_type}", :model => f.object.class.model_name.human), :class => "btn btn-primary right"

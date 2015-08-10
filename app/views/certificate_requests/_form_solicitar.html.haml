@@ -1,0 +1,222 @@
+= form_for CertificateRequest.build_object, :url => "", :html => { :id => "#{form_type}_certificate_request" } do |f|
+  = content_for :templates do
+    = script_template("certificate_request_coverage_fields_for_#{form_type}", :partial => 'certificate_requests/nesteds/certificate_request_coverages/fields_for', :locals => {:form => f})
+
+  %fieldset
+
+    .row-fluid
+      .span6
+        .row-fluid
+          .span12
+            .control-group
+              = f.label :num_constancia, :class => "control-label"
+              .controls
+                = f.text_field :num_constancia, :class => "input-medium", :readonly => true
+        .row-fluid
+          .span12
+            .control-group
+              = f.label :moneda, :class => "control-label"
+              .controls
+                = f.select :moneda, options_for_select(@monedas), { :prompt => "- Seleccione -" }, { :class => 'input-medium' }
+
+      .span4
+        .row-fluid
+          .span6
+            = f.label :importe, :class => "control-label"
+          .span6
+            = f.text_field :importe, :class => "input-small"
+
+      .span2
+        .row-fluid
+          .span12
+            {{if status == 1}}
+            .label.pull-right= "SOLICITADO"
+            {{/if}}
+        .row-fluid
+          .span12
+            {{if cancelado == 1}}
+            .label.label-important.pull-right= "CANCELADO"
+            {{/if}}
+
+    %br
+    .row-fluid
+      .span12
+        %ul#nav-secciones.nav.nav-tabs{ :style => "margin-bottom: 0px" }
+          %li.active
+            %a{ :vista => 'divCliente', :href => '#' }
+              %b= "Datos del Cliente"
+          %li
+            %a{ :vista => 'divBienes', :href => '#' }
+              %b= "Bienes Asegurados"
+          %li
+            %a{ :vista => 'divTransito', :href => '#' }
+              %b= "Tránsito"
+
+    .row-fluid#divCliente.divSecciones
+      .span12.tabSeccion
+
+        .row-fluid
+          .span6
+            .control-group
+              = f.label :nombre, :class => "control-label"
+              .controls
+                = f.text_field :nombre, :class => "input-xlarge span12", :maxlength => 250
+          .span4
+            .control-group
+              = f.label :rfc, :class => "control-label"
+              .controls
+                = f.text_field :rfc, :class => "input-medium", :maxlength => 13
+
+        .row-fluid
+          .span6
+            .control-group
+              = f.label :direccion, :class => "control-label"
+              .controls
+                = f.text_field :direccion, :class => "input-xlarge span12", :maxlength => 250
+          .span4
+            .control-group
+              = f.label :cp, :class => "control-label"
+              .controls
+                = f.text_field :cp, :class => "input-small", :maxlength => 6
+
+        .row-fluid
+          .span3
+            .control-group
+              %label= "País"
+              .controls
+                = select_tag "country_id", options_from_collection_for_select(@countries, "id", "name"), { :class => "input-large", :prompt => "- Seleccione -" }
+          .span3
+            .control-group
+              %label= "Estado"
+              .controls
+                = select_tag "state_id", nil, { :class => "input-large", :prompt => "- Seleccione -" }
+          .span3
+            .control-group
+              = f.label :city_id, :class => "control-label"
+              .controls
+                = f.collection_select :city_id, [], :id, :name, { :prompt => "- Seleccione -" }, { :class => "input-large" }
+
+
+    .row-fluid#divBienes.divSecciones{ :style => "display:none" }
+      .span12.tabSeccion
+
+        .row-fluid
+          .span12
+            .control-group
+              = f.label :possession_id, :class => "control-label"
+              .controls
+                = f.select :possession_id, options_from_collection_for_select(@bienes, "id", "name"), { :prompt => "- Seleccione -" }, { :class => "input-xlarge span10" }
+
+        .row-fluid
+          .span12
+            .control-group
+              = f.label :possession_description, :class => "control-label"
+              .controls
+                = f.text_field :possession_description, :class => "input-xlarge span10", :maxlength => 250
+
+        .row-fluid
+          .span12
+            .control-group
+              = f.label :packaging, :class => "control-label"
+              .controls
+                = f.text_field :packaging, :value => "#{@packaging_default}", :class => "input-xlarge span10", :maxlength => 250
+
+
+    .row-fluid#divTransito.divSecciones{ :style => "display:none" }
+      .span12.tabSeccion
+
+        .row-fluid
+          - Transportation.all.each do |transportation|
+            .span2
+              = check_box_tag "certificate_request[transportation_ids][]", transportation.id, false
+              = transportation.name
+
+        .row-fluid
+          .span2
+            .control-group
+              = f.label :fecha_salida, :class => "control-label"
+              .control
+                .input-append.date.calendario{"data-date-format" =>"yyyy-mm-dd"}
+                  = text_field_tag :fecha_salida, nil, :class => "input-small", :readonly => true, :'data-date-format' => "yyyy-mm-dd"
+                  %span.add-on
+                    %i.icon-th
+
+          .span2
+            .control-group
+              =f.label :Hora_salida, :class => "control-label"
+              =f.hora
+
+          .span2
+            .control-group
+              = f.label :fecha_llegada, :class => "control-label"
+              .control
+                .input-append.date.calendario{"data-date-format" =>"yyyy-mm-dd"}
+                  = text_field_tag :fecha_llegada, nil, :class => "input-small", :readonly => true, :'data-date-format' => "yyyy-mm-dd"
+                  %span.add-on
+                    %i.icon-th
+
+          .span2
+            .control-group
+              = f.label :num_invoice, :class => "control-label"
+              .controls
+                = f.text_field :num_invoice, :class => "input-small span12", :maxlength => 20
+
+          .span4
+            .control-group
+              = f.check_box :use_beneficiario
+              %span= "Beneficiario"
+              .controls
+                {{if use_beneficiario}}
+                = f.text_field :beneficiario, :class => "input-large span12"
+                {{else}}
+                = f.text_field :beneficiario, :class => "input-large span12",  :disabled => true
+                {{/if}}
+
+        .row-fluid
+          .span3
+            .control-group
+              %label= "Desde (origen)"
+              .controls
+                = select_tag "country_from_id", options_from_collection_for_select(@countries, "id", "name"), { :class => "span12", :prompt => "- Seleccione -" }
+          .span3
+            .control-group
+              %label &nbsp;
+              .controls
+                = select_tag "state_from_id", nil, { :class => "span12", :prompt => "- Seleccione -" }
+          .span3
+            .control-group
+              %label &nbsp;
+              .controls
+                = f.collection_select :city_from_id, [], :id, :name, { :prompt => true, :class => "input-xlarge span12" }
+
+        .row-fluid
+          .span3
+            .control-group
+              %label= "hasta (destino)"
+              .controls
+                = select_tag "country_to_id", options_from_collection_for_select(@countries, "id", "name"), { :class => "span12", :prompt => "- Seleccione -" }
+          .span3
+            .control-group
+              %label &nbsp;
+              .controls
+                = select_tag "state_to_id", nil, { :class => "span12", :prompt => "- Seleccione -" }
+          .span3
+            .control-group
+              %label &nbsp;
+              .controls
+                = f.collection_select :city_to_id, [], :id, :name, { :prompt => true, :class => "input-xlarge span12" }
+
+    %br
+    {{if '#{form_type}' == 'new' || cancelado == 0}}
+    .row-fluid
+      .span6
+        - if can? :setRequestCertificate, CertificateRequest
+          = f.submit t("helpers.submit.#{form_type}", :model => f.object.class.model_name.human), :class => "btn btn-primary"
+      .span6
+        - if can? :setCancelCertificate, CertificateRequest
+          {{if status}}
+          .btn.btn-danger.pull-right#cmdCancelar= "Cancelar Solicitud"
+          {{/if}}
+    {{/if}}
+    %br
+    %br

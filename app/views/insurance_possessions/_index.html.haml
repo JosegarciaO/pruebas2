@@ -1,0 +1,23 @@
+.row
+  .span12
+    .page-header
+      %h1= t(".title")
+      %ul.tabs
+        %li
+          = link_to t("links.new", :resource => InsurancePossession.model_name.human), "#/new"
+
+.row
+  .span12
+    %table#insurance_possessions_table.table.table-striped
+      %thead
+        %tr
+          %th= InsurancePossession.human_attribute_name(:insurance)
+          %th= InsurancePossession.human_attribute_name(:possession)
+          %th= InsurancePossession.human_attribute_name(:has_max_amount)
+          %th= InsurancePossession.human_attribute_name(:max_amount)
+          %th.actions
+            = link_to "", "#", :class => "icon-refresh", :id => "refresh_insurance_possessions", :title => t("links.refresh"), :alt => t("links.refresh")
+
+      %tbody
+
+#pagination-container

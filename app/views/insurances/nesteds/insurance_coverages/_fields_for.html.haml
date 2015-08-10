@@ -1,0 +1,15 @@
+= form.fields_for :insurance_coverages, :child_index => "${insurance_coverage_cid }" do |f|
+  %tr
+    %td
+      = f.hidden_field :id, :value => "${id}"
+      {{if apply}}
+      = f.check_box :apply, {:checked => true, :class => 'check-apply'}
+      {{else}}
+      = f.check_box :apply, {:checked => false, :class => 'check-apply'}
+      {{/if}}
+      = f.hidden_field :coverage_id, :value => "${coverage_id}"
+      = f.hidden_field "_destroy"
+    %td
+      = "${coverage_name}"
+    %td
+      = f.text_field :deductible_min, :value => "${deductible_min}", :class => "input-small"

@@ -1,0 +1,23 @@
+.row
+  .span12
+    = form_for Transportation.new, :url => "", :html => { :id => "#{form_type}_transportation" } do |f|
+      %fieldset
+        .control-group
+          = f.label :name, :class => "control-label"
+          .controls
+            = f.text_field :name, :class => "input-xlarge"
+
+        %h4
+          Clausulas Obligatorias
+          %br
+          %small Seleccione las clausulas que serán obligatorias para los certificados que utilicen este medio de transporte
+
+        %ul#clauses
+
+
+      .row
+        #eip-container.span12
+
+      .row
+        #eip-buttons.span12.well
+          = f.submit t("helpers.submit.#{form_type}", :model => f.object.class.model_name.human), :class => "btn btn-primary right"

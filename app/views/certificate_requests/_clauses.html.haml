@@ -1,0 +1,18 @@
+%td.span12
+  .span1
+    {{if is_included}}
+    {{if isfixed || transportationFixed}}
+    = check_box_tag  "clause_${id}", true, true, { :id => "clause_${id}", :class => 'chk_clause', :disabled => true }
+    {{else}}
+    = check_box_tag  "clause_${id}", true, true, :id => "clause_${id}", :class => 'chk_clause'
+    {{/if}}
+    {{else}}
+    {{if isfixed || transportationFixed}}
+    = check_box_tag  "clause_${id}", true, true, { :id => "clause_${id}", :class => 'chk_clause', :disabled => true }
+    {{else}}
+    = check_box_tag  "clause_${id}", true, false, :id => "clause_${id}", :class => 'chk_clause'
+    {{/if}}
+    {{/if}}
+
+  .span11
+    = "${name}"

@@ -1,0 +1,36 @@
+.row
+  .span12
+    .page-header
+      %h1= t(".title")
+      %ul.tabs
+        %li= link_to t("links.back"), "#/index"
+        %li= link_to t("links.edit"), "#/${id}/edit"
+        %li= link_to t("links.destroy"), "#/index", :class => "destroy", :confirm => t("links.confirm")
+
+.row
+  .span8
+    %p
+      %strong= InsurancePossession.human_attribute_name(:insurance)
+      ${insurance}
+
+    %p
+      %strong= InsurancePossession.human_attribute_name(:possession)
+      ${possession}
+
+    %p
+      %strong= InsurancePossession.human_attribute_name(:has_max_amount)
+      ${has_max_amount}
+
+    %p
+      %strong= InsurancePossession.human_attribute_name(:max_amount)
+      ${max_amount}
+
+
+  .span4
+    .dashboard
+      .page-header
+        %h3
+      %p
+
+
+

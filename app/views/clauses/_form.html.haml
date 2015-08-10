@@ -1,0 +1,29 @@
+.row
+  .span12
+    = form_for Clause.new, :url => "", :html => { :id => "#{form_type}_clause" } do |f|
+      %fieldset
+        .row
+          .span12
+            .control-group
+              = f.label :name, :class => "control-label"
+              .controls
+                = f.text_field :name, :class => "input-xlarge", :class => "input-xlarge span8", :maxlength => 250
+
+        .row
+          .span2
+            .control-group
+              = f.label :isfixed, :class => "control-label"
+              .controls
+                = f.check_box :isfixed
+          .span2
+            .control-group
+              = f.label :active, :class => "control-label"
+              .controls
+                = f.check_box :active
+
+      .row
+        #eip-container.span12
+
+      .row
+        #eip-buttons.span12.well
+          = f.submit t("helpers.submit.#{form_type}", :model => f.object.class.model_name.human), :class => "btn btn-primary right"

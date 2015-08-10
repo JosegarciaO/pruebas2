@@ -1,0 +1,83 @@
+report.layout.config.list(:certificado) do
+
+end
+
+report.start_new_page do |page|
+
+  cur_date = DateTime.now()
+  page.values(
+    num_certificado: "#{@certif.num_constancia}",
+    fecha_emision: (@certif.emission_date) ? @certif.emission_date.strftime("%d/%m/%Y") : '',
+    logo: (@certif.policy_id) ? "#{@certif.policy.insurance.logo.path}" : "",
+    logo_orbe: "#{Rails.root}/app/assets/images/logo.jpg",
+    watermark: (@certif.statusEmitido? and !@certif.statusCancelado?) ? "" : "#{Rails.root}/app/assets/images/watermark.png",
+    insurance_name: @certif.policy ? "#{@certif.policy.insurance.name.upcase}\n#{@certif.policy.insurance.tin.upcase}" : "",
+    insurance_address: @certif.policy ? "#{@certif.policy.insurance.street.upcase}\n#{@certif.policy.insurance.area.upcase}, #{@certif.policy.insurance.city.name.upcase}\n#{@certif.policy.insurance.city.state.name.upcase} C.P. #{@certif.policy.insurance.zip_code.upcase}" : ""
+  )
+
+
+  # -- DATOS DEL DETALLE --
+  page.list(:certificado).add_row do |row|
+    row.item(:poliza).value( (@certif.policy_id) ? @certif.policy.folio : '' )
+
+    row.item(:nombre).value( @certif.nombre )
+    row.item(:rfc).value( @certif.rfc )
+    row.item(:domicilio).value( @certif.getDomicilio() )
+    row.item(:cp).value( @certif.cp )
+
+    row.item(:bienes).value( @certif.possession.name )
+    row.item(:descripcion).value( @certif.possession_description )
+    row.item(:embalaje).value( @certif.packaging )
+
+    transito  = "Tránsito desde " + @certif.city_from.name.titlecase + ', ' + @certif.city_from.state.name.titlecase + ', ' + @certif.city_from.state.country.name.titlecase
+    transito  = transito + ' hasta ' + @certif.city_to.name.titlecase + ', ' + @certif.city_to.state.name.titlecase + ', ' + @certif.city_to.state.country.name.titlecase
+    row.item(:transito).value( transito )
+
+    row.item(:medio).value( @certif.get_transportation_text )
+    row.item(:fecha_salida).value( @certif.fecha_salida.strftime('%d/%m/%Y') )
+    row.item(:fecha_llegada).value( @certif.fecha_llegada.strftime('%d/%m/%Y') )
+    row.item(:num_factura).value( @certif.num_invoice )
+
+    row.item(:coberturas).value( @certif.get_text_coverages() )
+    row.item(:clausulas).value( @certif.get_text_clauses() )
+
+    # row.item(:deducibles).value( @certif.deducibles )
+
+    moneda_name = ListasGenerales::getNombreMoneda(@certif.moneda)
+
+    row.item(:importe).value( number_to_currency(@certif.importe.to_s) )
+    row.item(:prima_neta).value( number_to_currency(@certif.getPrimaNeta().to_s) )
+    row.item(:gastos_exp).value( number_to_currency(@certif.expedition_fee.to_s) )
+    row.item(:iva).value( number_to_currency(@certif.iva_amount.to_s) )
+    row.item(:prima_total).value( number_to_currency(@certif.total_prime.to_s) )
+    row.item(:moneda).value( moneda_name )
+
+    row.item(:valuacion).value( (@certif.policy_id) ? "Misma que en la póliza #{@certif.policy.folio}" : "")
+    row.item(:beneficiario).value( @certif.getBeneficiario )
+
+    row.item(:codigo_seguridad).value( @certif.codigo_seguridad )
+
+    row.item(:firma1).value( (@certif.policy_id) ? "#{@certif.policy.insurance.firma1.path}" : "" )
+    row.item(:firma2).value( (@certif.policy_id) ? "#{@certif.policy.insurance.firma2.path}" : "" )
+
+  end
+end
+
+if @certif.policy
+  report.set_layout :tlf => "/certificate_requests/print2"
+  @certif.policy.insurance.annexes.each do |annex|
+    report.start_new_page do |page|
+      page.values(
+        num_certificado: "#{@certif.num_constancia}",
+        fecha_emision: (@certif.emission_date) ? @certif.emission_date.strftime("%d/%m/%Y") : '',
+        logo: (@certif.policy_id) ? "#{@certif.policy.insurance.logo.path}" : "",
+        logo_orbe: "#{Rails.root}/app/assets/images/logo.jpg",
+        page_image: annex.image.path,
+        insurance_name: @certif.policy ? "#{@certif.policy.insurance.name.upcase}\n#{@certif.policy.insurance.tin.upcase}" : "",
+        insurance_address: "#{@certif.policy.insurance.street.upcase}\n#{@certif.policy.insurance.area.upcase}, #{@certif.policy.insurance.city.name.upcase}\n#{@certif.policy.insurance.city.state.name.upcase} C.P. #{@certif.policy.insurance.zip_code.upcase}"
+      )
+
+      page.item(:watermark).hide if (@certif.statusEmitido? and !@certif.statusCancelado?)
+    end
+  end
+end

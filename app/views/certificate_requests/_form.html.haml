@@ -1,0 +1,20 @@
+.row-fluid
+  .span12
+    - @can_solicitar = can? :setRequestCertificate,   CertificateRequest
+    - @can_cotizar   = can? :setQuoteCertificate,     CertificateRequest
+    - @can_autorizar = can? :setAuthorizeCertificate, CertificateRequest
+    - @can_emitir    = can? :setSealCertificate,      CertificateRequest
+    - @can_ver_cuota = can? :seeBaseFee, CertificateRequest
+
+    
+    {{if '#{form_type}' == 'new' || (#{@can_solicitar} == true && #{@can_cotizar} == false && status == 1) }}
+    = render :partial => "form_solicitar", :locals => { :form_type => "#{form_type}" }
+    {{else}}
+    {{if '#{form_type}' == 'edit' && #{@can_cotizar} == true && status == 1 }}
+    = render :partial => "form_cotizar", :locals => { :form_type => "#{form_type}" }
+    {{/if}}
+    {{/if}}
+
+    {{if '#{form_type}' == 'edit' && (status > 1)}}
+    = render :partial => "form_autorizar_emitir", :locals => { :form_type => "#{form_type}" }
+    {{/if}}

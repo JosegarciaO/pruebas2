@@ -1,0 +1,156 @@
+.row
+  .span12
+    = form_for Insurance.build_object, :url => "", :html => { :id => "#{form_type}_insurance" } do |f|
+      = content_for :templates do
+        = script_template("insurance_possession_fields_for_#{form_type}", :partial => 'insurances/nesteds/insurance_possessions/fields_for', :locals => {:form => f})
+        = script_template("annex_fields_for_#{form_type}", :partial => 'insurances/nesteds/annexes/fields_for', :locals => {:form => f})
+        = script_template("insurance_coverage_fields_for_#{form_type}", :partial => 'insurances/nesteds/insurance_coverages/fields_for', :locals => {:form => f})
+
+      %fieldset
+        .row
+          .span6
+            .control-group
+              = f.label :name, :class => "control-label"
+              .controls
+                = f.text_field :name, :class => "input-xlarge span6", :maxlength => 250
+
+          .span4
+            .control-group
+              = f.label :tin, :class => "control-label"
+              .controls
+                = f.text_field :tin, :class => "input-xlarge span4", :maxlength => 13
+
+        .row
+          .span12
+            .control-group
+              = f.label :street, :class => "control-label"
+              .controls
+                = f.text_field :street, :class => "input-xlarge span10", :maxlength => 250
+
+        .row
+          .span5
+            .control-group
+              = f.label :area, :class => "control-label"
+              .controls
+                = f.text_field :area, :class => "input-xlarge span5", :maxlength => 120
+
+          .span5
+            .control-group
+              = f.label :zip_code, :class => "control-label"
+              .controls
+                = f.text_field :zip_code, :class => "input-xlarge span5", :maxlength => 5
+
+        .row
+          .span5
+            .control-group
+              = f.label :state_id
+              .controls
+                = select_tag "state_id", options_from_collection_for_select(Country.find_by_name('MEXICO').states, "id", "name"), { :class => "span5", :prompt => "- Seleccione -" }
+          .span5
+            .control-group
+              = f.label :city_id
+              .controls
+                = f.collection_select :city_id, [], :id, :name, { :prompt => true }, { :class => "span5" }
+
+        .row
+          .span3
+            .control-group
+              = f.label :expedition_fee_mx, :class => "control-label"
+              .controls
+                = f.text_field :expedition_fee_mx, :class => "input-small"
+          .span3
+            .control-group
+              = f.label :expedition_fee_us, :class => "control-label"
+              .controls
+                = f.text_field :expedition_fee_us, :class => "input-small"
+          .span3
+            .control-group
+              = f.label :max_amount, :class => "control-label"
+              .controls
+                = f.text_field :max_amount, :class => "input-medium", :maxlength => 15
+                = "MN"
+
+        .row
+          .span12
+            .control-group
+              = f.label :deductible_text, :class => "control-label"
+              .controls
+                = f.text_area :deductible_text, :value => "${deductible_text}", :class => "input-large span10", :rows => 4
+
+        .row
+          .span12
+            %ul#nav-secciones.nav.nav-tabs
+              %li.active
+                %a{ :vista => 'divImagenes' }
+                  = "Imagenes"
+              %li
+                %a{ :vista => 'divBienes' }
+                  = "Bienes"
+              %li
+                %a{ :vista => 'divAnnexes' }
+                  = "Anexos"
+              %li
+                %a{ :vista => 'divCoberturas' }
+                  = "Coberturas"
+
+        .row#divImagenes.divSecciones
+          .span12
+            .row
+              .span6
+                .control-group
+                  = f.label :logo, :class => "control-label"
+                .controls
+                  = f.file_field :logo
+                  = image_tag '..${logo}', :width => 120
+            .row
+              .span6
+                .control-group
+                  = f.label :firma1, :class => "control-label"
+                .controls
+                  = f.file_field :firma1
+                  = image_tag '..${firma1}', :width => 120
+            .row
+              .span6
+                .control-group
+                  = f.label :firma2, :class => "control-label"
+                .controls
+                  = f.file_field :firma2
+                  = image_tag '..${firma2}', :width => 120
+
+        .row#divBienes.divSecciones{ :style => "display:none" }
+          .span12
+            .pull-right
+              = link_to t("links.add_item"), "#", :class => "add-item-possession btn btn-inverse"
+          .span12
+            %table{ :class => "table table-striped table-borderer table-condensed" }
+              %thead
+                %tr
+                  %th.span2= "Suma aseg. máx."
+                  %th.span8= "Descripción del Bien"
+                  %th.span2= ""
+              %tbody
+
+        .row#divAnnexes.divSecciones{ :style => "display:none" }
+          .span12
+            %span
+              Para mejor calidad del certificado las imagenes de los anexos debe medir 1100px por 1360px.
+            .pull-right
+              = link_to t("links.add_annex"), "#", :class => "add-item-annex btn btn-inverse"
+          .span12
+
+        .row#divCoberturas.divSecciones{ :style => "display:none" }
+          .span12
+            %table{ :class => "table table-striped table-borderer table-condensed" }
+              %thead
+                %tr
+                  %th.span2= "Cubierto"
+                  %th.span8= "Cobertura"
+                  %th.span2= "% Deducible"
+              %tbody
+
+      .row
+        #eip-container.span12
+
+      .row
+        #eip-buttons.span12.well
+          = f.submit t("helpers.submit.#{form_type}", :model => f.object.class.model_name.human), :class => "btn btn-primary right"

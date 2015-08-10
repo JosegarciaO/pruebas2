@@ -1,0 +1,32 @@
+.row
+  .span12
+    .page-header
+      %h1= t(".title")
+      %ul.tabs
+        %li= link_to t("links.back"), "#/index"
+        %li= link_to t("links.edit"), "#/${id}/edit"
+        %li= link_to t("links.destroy"), "#/index", :class => "destroy", :confirm => t("links.confirm")
+
+.row
+  .span8
+    %p
+      %strong= InsuranceCoverage.human_attribute_name(:insurance)
+      ${insurance}
+
+    %p
+      %strong= InsuranceCoverage.human_attribute_name(:coverage)
+      ${coverage}
+
+    %p
+      %strong= InsuranceCoverage.human_attribute_name(:deductible_min)
+      ${deductible_min}
+
+
+  .span4
+    .dashboard
+      .page-header
+        %h3
+      %p
+
+
+

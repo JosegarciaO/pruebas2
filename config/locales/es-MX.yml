@@ -1,0 +1,264 @@
+es-MX:
+
+  application_name: "Certificados ORBE"
+
+  links:
+    add_item: "Agregar Detalle"
+    add_annex: "Agregar Anexo"
+
+  activerecord:
+    models:
+      user: "Usuario"
+      role: "Roles"
+      country: "País"
+      state: "Estado"
+      city: "Ciudad"
+      insurance: "Aseguradora"
+      insurance_possession: "Bienes por Aseguradora"
+      certificate_request: "Solicitud de certificado"
+      certificate_request_coverage: "Cobertura de Certificado"
+      policy: "Póliza"
+      possession: "Bienes"
+      coverage: "Coberturas"
+      clause: "Cláusulas Adicionales"
+      general_setting: 'Configuraciones Generales'
+      transportation: "Medios de Transporte"
+
+    attributes:
+      user:
+        email: "Email"
+        password: "Contraseña"
+        password_confirmation: "Confirmar contraseña"
+        role_id: "Rol"
+        name: 'Nombre'
+        remember_me: "Recordar contraseña"
+      role:
+        name: "Nombre"
+      country:
+        name: "Nombre"
+      state:
+        name: "Nombre"
+        country_id: "País"
+      city:
+        name: "Nombre"
+        state_id: "Estado"
+      insurance:
+        name: "Nombre"
+        tin: "R.F.C."
+        street: "Calle"
+        area: "Colonia"
+        zip_code: "Código Postal"
+        city_id: "Ciudad"
+        state_id: "Estado"
+        expedition_fee_mx: "Gastos de Expedición (MN)"
+        expedition_fee_us: "Gastos de Expedición (USD)"
+        max_amount:  "Suma Asegurada Máxima"
+        deductible_text: "Texto Deducible"
+        logo: "Logotipo"
+        firma1: "Firma 1"
+        firma2: "Firma 2"
+      insurance_possession:
+        max_amount: "Suma Asegurada Máxima"
+        possession_id: "Bien"
+      insurance_coverage:
+        deductible_min: "% Deducible"
+        coverage_id: "Cobertura"
+      certificate_request:
+        num_constancia: "Num. Certificado"
+        nombre: "Asegurado"
+        direccion: "Dirección Fiscal"
+        city_id: "Ciudad"
+        cp: "Código Postal"
+        rfc: "RFC"
+        importe: "Importe Asegurado"
+        base_fee: "Cuota Base"
+        expedition_fee: "Gastos de Expedición"
+        iva: "IVA"
+        iva_amount: "Importe IVA"
+        total_prime: "Prima Total"
+        moneda: "Tipo de Moneda"
+        city_from_id: "Ciudad Origen"
+        city_to_id: "Ciudad Destino"
+        possession_id: "Bienes"
+        possession_description: "Descripción detallada"
+        packaging: "Embalaje"
+        num_invoice: "Factura/Carta Porte"
+        fecha_salida: "Fecha de Salida"
+        fecha_llegada: "Fecha de Llegada"
+        embarque: "Num. de embarque"
+        policy_id: "Póliza"
+        codigo_seguridad: "Código de Seguridad"
+        certificate_request_coverages: "Coberturas de Certificado"
+        deducibles: "Deducibles"
+        medida_seguridad: "Medidas de Seguridad"
+        transport_ground: "Terrestre"
+        transport_air: "Aereo"
+        transport_maritime: "Marítimo"
+        transport_rail: "Ferrocarril"
+        transport_package: "Paquetería/Mensajería"
+      certificate_request_coverage:
+        deductible: "Deducible"
+      policy:
+        folio: 'Folio'
+        moneda: 'Moneda'
+        insurance_id: "Aseguradora"
+        date_start: "Inicio Vigencia"
+        date_end: "Fin Vigencia"
+        activa: "Activa"
+      possession:
+        name: "Descripción"
+        active: "Activo"
+        has_max_amount: "Tiene suma aseg. máxima"
+        max_amount: "Suma Asegurada Máxima"
+      coverage:
+        name: "Descripción"
+        active: "Activo"
+        deductible_min:  "Deducible Mínimo"
+        deductible_editable:  "Deducible Editable"
+      clause:
+        name: 'Nombre'
+        isfixed: "Fijo"
+        active: "Activo"
+      general_setting:
+        iva: 'IVA'
+        base_fee_min: 'Base cuota mínima'
+        packaging_default: "Embalaje Default"
+        exchange_usd: "Tipo de cambio Dolar"
+        medidas_seguridad_default: "Medidas de Seguridad Default"
+        certificate_consecutive: "Consecutivo de Certificado"
+      transportation:
+        name: Nombre
+
+  users:
+    index:
+      title: "Usuarios"
+    new:
+      title: "Nuevo Usuario"
+    edit:
+      title: "Editar "
+    show:
+      title: "Usuario "
+  roles:
+    index:
+      title: "Roles"
+    new:
+      title: "Nuevo Rol"
+    edit:
+      title: "Editar "
+    show:
+      title: "Rol "
+  countries:
+    index:
+      title: "Paises"
+    new:
+      title: "Nuevo País"
+    edit:
+      title: "Editar "
+    show:
+      title: "País "
+  states:
+    index:
+      title: "Estados"
+    new:
+      title: "Nuevo Estado"
+    edit:
+      title: "Editar "
+    show:
+      title: "Estado "
+  cities:
+    index:
+      title: "Ciudades"
+    new:
+      title: "Nueva Ciudad"
+    edit:
+      title: "Editar "
+    show:
+      title: "Ciudad "
+  insurances:
+    index:
+      title: "Aseguradoras"
+    new:
+      title: "Nueva Aseguradora"
+    edit:
+      title: "Editar "
+    show:
+      title: "Aseguradora "
+  certificate_requests:
+    index:
+      title: "Solicitudes de Certificados"
+    new:
+      title: "Nueva Solicitud de Certificado"
+    edit:
+      title: "Editar "
+    show:
+      title: "Solicitud "
+  policies:
+    index:
+      title: "Pólizas"
+    new:
+      title: "Nueva Póliza"
+    edit:
+      title: "Editar "
+    show:
+      title: "Póliza "
+  possessions:
+    index:
+      title: "Bienes"
+    new:
+      title: "Nuevo Bien"
+    edit:
+      title: "Editar Bien"
+    show:
+      title: "Bien "
+  coverages:
+    index:
+      title: "Coberturas"
+    new:
+      title: "Nueva Cobertura"
+    edit:
+      title: "Editar Cobertura"
+    show:
+      title: "Ver Cobertura"
+  clauses:
+    index:
+      title: "Cláusulas Adicionales"
+    new:
+      title: "Nueva Cláusula"
+    edit:
+      title: "Editar Cláusula"
+    show:
+      title: "Ver Cláusula"
+  general_settings:
+    index:
+      title: "Configuraciones Generales"
+    new:
+      title: "Agregar Configuraciones"
+    edit:
+      title: "Editar Configuraciones"
+    show:
+      title: "Ver Configuraciones"
+  transportations:
+    index:
+      title: "Medios de Transporte"
+    new:
+      title: "Nuevo Medio de Transporte"
+    edit:
+      title: "Editar Medio de Transporte"
+    show:
+      title: "Ver Medio de Transporte"
+
+  navigation:
+    users: "Usuarios"
+    roles: "Roles"
+    countries: "Paises"
+    states: "Estados"
+    cities: "Ciudades"
+    insurances: "Aseguradoras"
+    certificate_requests: "Solicitudes de Certificados"
+    policies: "Pólizas"
+    possessions: "Bienes"
+    coverages: "Coberturas"
+    clauses: "Cláusulas"
+    general_settings: "Configuraciones Generales"
+    reports: "Reportes"
+    transportations: "Medios de Transporte"

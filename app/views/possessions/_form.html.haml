@@ -1,0 +1,34 @@
+.row
+  .span12
+    = form_for Possession.new, :url => "", :html => { :id => "#{form_type}_possession" } do |f|
+      %fieldset
+        .row
+          .span8
+            .control-group
+              = f.label :name, :class => "control-label"
+              .controls
+                = f.text_area :name, :value => "${name}", :class => "input-xlarge span8", :rows => 4, :maxlength => 250
+        .row
+          .span6
+            .control-group
+              %span= f.check_box :has_max_amount
+              %span.control-label= "Suma Asegurada Máxima"
+              .controls
+                {{if has_max_amount}}
+                = f.text_field :max_amount
+                {{else}}
+                = f.text_field :max_amount, :disabled => true
+                {{/if}}
+
+        .row
+          .span2
+            = f.label :active, :class => "control-label"
+            .controls
+              = f.check_box :active
+
+      .row
+        #eip-container.span12
+
+      .row
+        #eip-buttons.span12.well
+          = f.submit t("helpers.submit.#{form_type}", :model => f.object.class.model_name.human), :class => "btn btn-primary right"

@@ -1,0 +1,38 @@
+.row
+  .span12
+    .page-header
+      %h1= t(".title")
+      %ul.tabs
+        %li
+          = link_to t("links.new", :resource => CertificateRequest.model_name.human), "#/new"
+
+.row
+  .span2
+    .control-group
+      %label.control-label= "Status:"
+      .controls
+        = select_tag "filter_status", options_for_select(@all_status), { :prompt => "- Todos -", :class => 'span2' }
+  .span8
+    .control-group
+      %label.control-label= "Buqueda:"
+      .controls
+        = text_field_tag "search_text", '', { :placeholder => "Folio ó nombre", :class => 'input-large' }
+%br
+
+
+.row
+  .span12
+    %table#certificate_requests_table.table.table-striped
+      %thead
+        %tr
+          %th= "Folio / No. Certificado"
+          %th= CertificateRequest.human_attribute_name(:nombre) + " / " + CertificateRequest.human_attribute_name(:rfc)
+          %th= "Fechas"
+          %th= CertificateRequest.human_attribute_name(:importe) + " / " + CertificateRequest.human_attribute_name(:total_prime)
+          %th= CertificateRequest.human_attribute_name(:status)
+          %th.actions
+            = link_to "", "#", :class => "icon-refresh", :id => "refresh_certificate_requests", :title => t("links.refresh"), :alt => t("links.refresh")
+
+      %tbody
+
+#pagination-container

@@ -1,0 +1,38 @@
+.row
+  .span12
+    .page-header
+      %h1= t(".title")
+      %ul.tabs
+        %li= link_to t("links.back"), "#/index"
+        %li= link_to t("links.edit"), "#/${id}/edit"
+        %li= link_to t("links.destroy"), "#/index", :class => "destroy", :confirm => t("links.confirm")
+
+.row
+  .span8
+    %p
+      %strong= Clause.human_attribute_name(:name)
+      ${name}
+    %p
+      %strong= Clause.human_attribute_name(:isfixed)
+      {{if isfixed}}
+      = "SI"
+      {{else}}
+      = "No"
+      {{/if}}
+    %p
+      %strong= Clause.human_attribute_name(:active)
+      {{if active}}
+      = "SI"
+      {{else}}
+      = "No"
+      {{/if}}
+
+
+  .span4
+    .dashboard
+      .page-header
+        %h3
+      %p
+
+
+

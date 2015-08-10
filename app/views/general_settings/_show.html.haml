@@ -1,0 +1,48 @@
+.row
+  .span12
+    .page-header
+      %h1= t(".title")
+      %ul.tabs
+        %li= link_to t("links.back"), "#/index"
+        %li= link_to t("links.edit"), "#/${id}/edit"
+        %li= link_to t("links.destroy"), "#/index", :class => "destroy", :confirm => t("links.confirm")
+
+.row
+  .span8
+    %p
+      %strong= GeneralSetting.human_attribute_name(:iva)
+      ${iva}
+
+    %p
+      %strong= GeneralSetting.human_attribute_name(:base_fee_min)
+      ${base_fee_min}
+
+    %p
+      %strong= GeneralSetting.human_attribute_name(:exchange_usd)
+      ${exchange_usd}
+
+    %p
+      %strong= GeneralSetting.human_attribute_name(:certificate_consecutive)
+      ${certificate_consecutive}
+
+    %p
+      %strong= GeneralSetting.human_attribute_name(:packaging_default)
+      ${packaging_default}
+
+    %p
+      %strong= GeneralSetting.human_attribute_name(:medidas_seguridad_default)
+      ${medidas_seguridad_default}
+
+    %p
+      %strong= GeneralSetting.human_attribute_name(:deducible_default)
+      ${deducible_default}
+
+
+  .span4
+    .dashboard
+      .page-header
+        %h3
+      %p
+
+
+

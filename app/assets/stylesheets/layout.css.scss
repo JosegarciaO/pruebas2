@@ -1,0 +1,104 @@
+@import "bootstrap";
+
+.login {
+  h2.logo {
+    background: url(image_path('logo.png')) no-repeat scroll center 0 transparent;
+    text-indent: -9999px;
+    width: 192px;
+    height: 50px;
+    margin: 0px auto 15px;
+  }
+
+  .gray_square {
+    input[type=email], input[type=password] {
+      width: 97%;
+    }
+  }
+}
+
+.page-header {
+  h1 {
+    display: inline;
+  }
+  .tabs {
+    float: right;
+    width: auto;
+    border: none;
+    list-style: none outside none;
+    margin: 0 !important;
+  }
+}
+
+.tabs li {
+  display: inline;
+}
+
+.tabs li a {
+  font-family: Arial;
+  font-size:11px;
+  text-decoration: none;
+  float:left;
+  padding: 10px;
+  color: #000;
+}
+
+.navbar .brand {
+  color: white;
+}
+
+.navbar .nav > li > form > a {
+    color: #999999;
+    float: none;
+    line-height: 19px;
+    padding: 10px 10px 11px;
+    text-decoration: none;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    display: block;
+}
+
+.navbar .nav > li > form {
+  margin: 0;
+}
+
+th.actions{
+  width: 70px;
+  text-align: right;
+}
+
+.icon-list-container{
+   position: relative;
+
+    &:hover{
+      .icon-image{ background-position: -288px -120px; }
+      ul{ display: block; }
+    }
+
+  .icon-image{
+    background-position: -313px -119px;
+    cursor: pointer;
+    z-index: 1;
+
+  }
+
+  ul{
+    display: none;
+    margin-top: 14px;
+    padding: 5px 25px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+  }
+
+}
+
+.hidden{  display: none; }
+
+body {
+  padding-top: 60px;
+}
+
+.modal{
+  margin: -250px 0 0 -500px;
+  width: 1000px;
+}

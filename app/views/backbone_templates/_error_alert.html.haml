@@ -1,0 +1,7 @@
+.alert.alert-error.alert-block
+  %a.close{:href =>"#", "data-dismiss"=>"alert"} x
+
+  {{each messages}}
+  %p
+    %strong ${name} ${message}
+  {{/each}}

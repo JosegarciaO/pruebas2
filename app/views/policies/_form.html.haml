@@ -1,0 +1,46 @@
+.row
+  .span12
+    = form_for Policy.new, :url => "", :html => { :id => "#{form_type}_policy" } do |f|
+      %fieldset
+        .control-group
+          = f.label :folio, :class => "control-label"
+          .controls
+            = f.text_field :folio, :class => "input-xlarge"
+
+        .control-group
+          = f.label :moneda, :class => "control-label"
+          .controls
+            = f.select :moneda, options_for_select(@monedas), { :prompt => "- Seleccione -" }, { :class => "span2" }
+
+        .control-group
+          = f.label :date_start, :class => "control-label"
+          .control
+            .input-append.date.calendario{"data-date-format" =>"yyyy-mm-dd"}
+              = text_field_tag :date_start, nil, :class => "input-small", :readonly => true, :'data-date-format' => "yyyy-mm-dd"
+              %span.add-on
+                %i.icon-th
+
+        .control-group
+          = f.label :date_end, :class => "control-label"
+          .control
+            .input-append.date.calendario{"data-date-format" =>"yyyy-mm-dd"}
+              = text_field_tag :date_end, nil, :class => "input-small", :readonly => true, :'data-date-format' => "yyyy-mm-dd"
+              %span.add-on
+                %i.icon-th
+
+        -#.control-group
+        -#  = f.label :activa, :class => "control-label"
+        -#  .controls
+        -#    = f.check_box :activa
+
+        .control-group
+          = f.label :insurance_id, :class => "control-label"
+          .controls
+            = f.collection_select :insurance_id, @insurances, :id, :name, { :prompt => "- Seleccione -", :class => "input-large" }
+
+      .row
+        #eip-container.span12
+
+      .row
+        #eip-buttons.span12.well
+          = f.submit t("helpers.submit.#{form_type}", :model => f.object.class.model_name.human), :class => "btn btn-primary right"

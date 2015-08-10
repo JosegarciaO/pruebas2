@@ -1,0 +1,15 @@
+.row
+  .span12
+    = form_for Country.new, :url => "", :html => { :id => "#{form_type}_country" } do |f|
+      %fieldset
+        .control-group
+          = f.label :name, :class => "control-label"
+          .controls
+            = f.text_field :name, :class => "input-xlarge"
+
+      .row
+        #eip-container.span12
+
+      .row
+        #eip-buttons.span12.well
+          = f.submit t("helpers.submit.#{form_type}", :model => f.object.class.model_name.human), :class => "btn btn-primary right"

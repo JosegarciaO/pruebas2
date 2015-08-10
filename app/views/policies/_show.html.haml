@@ -1,0 +1,37 @@
+.row
+  .span12
+    .page-header
+      %h1= t(".title")
+      %ul.tabs
+        %li= link_to t("links.back"), "#/index"
+        %li= link_to t("links.edit"), "#/${id}/edit"
+        %li= link_to t("links.destroy"), "#/index", :class => "destroy", :confirm => t("links.confirm")
+
+.row
+  .span8
+    %p
+      %strong= Policy.human_attribute_name(:folio)
+      ${folio}
+
+    %p
+      %strong= Policy.human_attribute_name(:moneda)
+      ${moneda_name}
+
+
+    %p
+      %strong= Policy.human_attribute_name(:insurance_id)
+      ${insurance.name}
+
+    %p
+      {{if activa}}
+      %strong= "POLIZA ACTIVA"
+      {{/if}}
+
+  .span4
+    .dashboard
+      .page-header
+        %h3
+      %p
+
+
+

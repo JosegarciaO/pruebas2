@@ -1,0 +1,10 @@
+-#= form.fields_for :certificate_request_coverages, :child_index => "${certificate_request_coverage_cid }" do |f|
+-#  %tr
+-#    %td
+-#      = f.collection_select :coverage_id, @coberturas, :id, :name, { :prompt => "- Seleccione -" }, :class => "span8"
+-#
+-#    %td
+-#      {{if id}}
+-#      {{else}}
+-#      = link_to t("links.destroy"), "#", :class => "destroy-nested btn btn-danger", :'data-confirm' => '¿Estas seguro?'
+-#      {{/if}}

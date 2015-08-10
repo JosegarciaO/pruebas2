@@ -1,0 +1,22 @@
+.row
+  .span12
+    .page-header
+      %h1= t(".title")
+      %ul.tabs
+        %li
+          = link_to t("links.new", :resource => CertificateRequestClause.model_name.human), "#/new"
+
+.row
+  .span12
+    %table#certificate_request_clauses_table.table.table-striped
+      %thead
+        %tr
+          %th= CertificateRequestClause.human_attribute_name(:certificate_request)
+          %th= CertificateRequestClause.human_attribute_name(:clause)
+          %th= CertificateRequestClause.human_attribute_name(:is_included)
+          %th.actions
+            = link_to "", "#", :class => "icon-refresh", :id => "refresh_certificate_request_clauses", :title => t("links.refresh"), :alt => t("links.refresh")
+
+      %tbody
+
+#pagination-container

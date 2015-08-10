@@ -1,0 +1,6 @@
+{{if checked}}
+= check_box_tag "clause_${id}", true, true, { :id => "clause_${id}", :class => 'chk_clause'}
+{{else}}
+= check_box_tag "clause_${id}", true, false, { :id => "clause_${id}", :class => 'chk_clause'}
+{{/if}}
+= "${name}"

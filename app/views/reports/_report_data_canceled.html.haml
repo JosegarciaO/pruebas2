@@ -1,0 +1,10 @@
+%td ${num_constancia}
+%td ${nombre}
+%td ${canceled_at}
+{{if moneda == 'M'}}
+%td= "MN"
+{{else}}
+%td= "USD"
+{{/if}}
+%td ${importe}
+%td ${total_prime}

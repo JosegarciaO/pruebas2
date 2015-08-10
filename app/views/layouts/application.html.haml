@@ -1,0 +1,42 @@
+!!! 5
+%html
+  %head
+    %title= title_page
+    = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+
+          %a.btn.btn-navbar{:"data-toggle" => "dropdown", :"data-target" => ".nav-collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+
+          %h3.logop
+          = render_navigation(:expand_all => true)
+
+          %ul.nav.pull-right
+            %li.logout
+              -#= link_to t("links.Log_out"), destroy_user_session_path, :method => :delete
+              - @usuario = current_user.email
+              = link_to "Cerrar sesión de #{@usuario}", destroy_user_session_path, :method => :delete
+
+    .container
+      .row
+        #alerts_container.span12
+
+      = yield
+
+      -#= render :partial => "backbone_templates/modal_form"
+
+      = yield :templates
+
+      = script_template("warning_alert", :partial => "backbone_templates/warning_alert", :id => "backboneWarningAlert")
+      = script_template("error_alert", :partial => "backbone_templates/error_alert", :id => "backboneErrorAlert")
+      = script_template("success_alert", :partial => "backbone_templates/success_alert", :id => "backboneSuccessAlert")
+      = script_template("info_alert", :partial => "backbone_templates/info_alert", :id => "backboneInfoAlert")
+      = script_template("pagination", :partial => "backbone_templates/pagination", :id => "backboneTemplatesPagination")

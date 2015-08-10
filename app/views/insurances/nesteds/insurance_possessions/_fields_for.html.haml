@@ -1,0 +1,9 @@
+= form.fields_for :insurance_possessions, :child_index => "${insurance_possession_cid }" do |f|
+	%tr
+		%td
+			= f.hidden_field :id, :value => "${id}"
+			= f.text_field :max_amount, :class => "input-small"
+		%td
+			= f.collection_select :possession_id, @bienes, :id, :name, { :prompt => true }, :class => "span8"
+		%td
+			= link_to t("links.destroy"), "#", :class => "destroy-item-possession btn btn-danger", :'data-confirm' => "¿Esta seguro?"

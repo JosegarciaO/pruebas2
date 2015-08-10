@@ -1,0 +1,95 @@
+.row
+  .span12
+    .page-header
+      %h1= "Reportes"
+
+.row
+  .span12
+    = form_tag "", :id => 'report_form', :method => 'get' do 
+      %fieldset
+        .row
+          .span2
+            .control-group
+              %label.control-label= "Tipo de Reporte"
+              .controls
+                = select_tag "type_rpt", options_for_select(@type_rpt), { :class => 'span2' }
+          .span2
+            .control-group
+              %label.control-label= "Fecha Inicial:"
+              .controls
+                .input-append.date.calendario{"data-date-format" =>"yyyy-mm-dd"}
+                  = text_field_tag "date_start", @start, :class => 'input-small', :readonly => true, :'data-date-format' => "yyyy-mm-dd"
+                  %span.add-on
+                    %i.icon-th
+          .span2
+            .control-group
+              %label.control-label= "Fecha Final:"
+              .controls
+                .input-append.date.calendario{"data-date-format" =>"yyyy-mm-dd"}
+                  = text_field_tag "date_end", @today, :class => 'input-small', :readonly => true, :'data-date-format' => "yyyy-mm-dd"
+                  %span.add-on
+                    %i.icon-th
+
+        .row
+          .span3
+            .control-group
+              %label.control-label= "Aseguradora"
+              .controls
+                = select_tag "insurance", options_from_collection_for_select(@insurances,'id','name'), { :prompt => "- Todos -", :class => 'span3' }
+          .span3
+            .control-group
+              %label.control-label= "Póliza"
+              .controls
+                = select_tag "policy", "", { :prompt => "- Todos -", :class => 'span3' }
+          .span2
+            .control-group
+              %label.control-label &nbsp;
+              .controls
+                .btn-group
+                  %button.btn.btn-primary#opt-visualizar= "Visualizar"
+                  %button.btn.btn-primary.dropdown-toggle{ :'data-toggle' => 'dropdown' }
+                    %span.caret
+                  %ul.dropdown-menu
+                    %li
+                      %a#opt-to-pdf{ :href => "#" }= "Exportar a PDF"
+                    %li
+                      %a#opt-to-excel{ :href => "#" }= "Exportar a Excel"
+          .span1
+            = hidden_field_tag "type_file", nil
+.row
+  .span12
+    %table#rpt-emitidos.table{:style => 'display:none'}
+      %thead
+        %tr
+          %td
+            %b= "Folio"
+          %td
+            %b= "Nombre"
+          %td
+            %b= "Fecha Emisión"
+          %td
+            %b= "Moneda"
+          %td
+            %b= "Suma Asegurada"
+          %td
+            %b= "Prima Total"
+      %tbody
+    %table#rpt-cancelados.table{:style => 'display:none'}
+      %thead
+        %tr
+          %td
+            %b= "Folio"
+          %td
+            %b= "Nombre"
+          %td
+            %b= "Fecha Cancelación"
+          %td
+            %b= "Moneda"
+          %td
+            %b= "Suma Asegurada"
+          %td
+            %b= "Prima Total"
+      %tbody
+
+%br
+%br

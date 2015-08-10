@@ -1,0 +1,25 @@
+.row
+  .span12
+    = form_for InsuranceCoverage.new, :url => "", :html => { :id => "#{form_type}_insurance_coverage" } do |f|
+      %fieldset
+        .control-group
+          = f.label :insurance, :class => "control-label"
+          .controls
+            = f.text_field :insurance, :class => "input-xlarge"
+
+        .control-group
+          = f.label :coverage, :class => "control-label"
+          .controls
+            = f.text_field :coverage, :class => "input-xlarge"
+
+        .control-group
+          = f.label :deductible_min, :class => "control-label"
+          .controls
+            = f.text_field :deductible_min, :class => "input-xlarge"
+
+      .row
+        #eip-container.span12
+
+      .row
+        #eip-buttons.span12.well
+          = f.submit t("helpers.submit.#{form_type}", :model => f.object.class.model_name.human), :class => "btn btn-primary right"

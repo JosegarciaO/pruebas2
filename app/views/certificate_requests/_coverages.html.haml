@@ -1,0 +1,13 @@
+%td.span12
+	.span1
+		{{if incluir}}
+		= check_box_tag  "coverage_${id}", true, true, :id => "coverage_${id}", :class => 'chk_coverage'
+		{{else}}
+		= check_box_tag  "coverage_${id}", true, false, :id => "coverage_${id}", :class => 'chk_coverage'
+		{{/if}}
+
+	.span2
+		= text_field_tag "coverage_deductible_${id}", "${deductible}", :id => "coverage_deductible_${id}", :class => "input-small txt_ded_coverage"
+
+	.span8
+		= "${coverage_name}"
